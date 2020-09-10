@@ -289,10 +289,11 @@ static size_t EdgeCount(const MeshType &m)
 /// \brief This function returns the number of selected vertices.
 static size_t VertexCount(const MeshType &m)
 {
-  size_t selCnt=0;
-  for (auto v: m.vert)
-      if(!v.IsD() && v.IsS()) ++selCnt;
-  return selCnt;
+  size_t selCnt = 0;
+  ForEachVertex(m, [&selCnt] (const VertexType & v) {
+    if (v.IsS())
+      ++selCnt;
+  });
 }
 
 /// \brief This function returns the number of selected tetras.
