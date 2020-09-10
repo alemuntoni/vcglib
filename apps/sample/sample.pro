@@ -5,7 +5,7 @@ SUBDIRS = \
 	colorspace \
 	#edgemesh_sampling \
 	polygonmesh_base \
-	#polygonmesh_dual \
+	polygonmesh_dual \
 	polygonmesh_optimize \
 	polygonmesh_polychord_collapse \
 	#polygonmesh_quadsimpl \
