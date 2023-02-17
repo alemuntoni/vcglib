@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.13)
 project(VCGExamples)
 
 set(VCG_EXAMPLE_PROJECTS
+	mytest
 	aabb_binary_tree
 	colorspace
 	polygonmesh_base
