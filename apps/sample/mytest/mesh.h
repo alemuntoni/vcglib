@@ -14,6 +14,7 @@ class MyVertex  :
 		MyUsedTypes,
 		vcg::vertex::Coord3d,
 		vcg::vertex::Normal3d,
+		vcg::vertex::Color4b,
 		vcg::vertex::VFAdj,
 		vcg::vertex::Qualityd,
 		vcg::vertex::CurvatureDird,

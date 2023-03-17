@@ -28,24 +28,35 @@
 */
 
 #include "mesh.h"
+#include "timer.h"
 
 #include<wrap/io_trimesh/import_ply.h>
 #include<wrap/io_trimesh/import_obj.h>
 #include<wrap/io_trimesh/export_ply.h>
 
-#include <vcg/complex/algorithms/intersection.h>
+#include <vcg/simplex/face/distance.h>
+
+
 
 int main( int /*argc*/, char **/*argv*/ )
 {
-	MyMesh m, res;
+	MyMesh m;
 
 	int mask;
-	vcg::tri::io::ImporterOBJ<MyMesh>::Open(m, "/home/alessandro/Drive/Research/3DMeshes/bimba.obj", mask);
+	vcg::tri::io::ImporterOBJ<MyMesh>::Open(m, "/home/alessandro/Drive/Research/3DMeshes/cube.obj", mask);
 
-	vcg::Sphere3<double> s(vcg::Point3d(0,0,0), 0.3);
-	vcg::IntersectionBallMesh(m, s, res);
+	vcg::Point3d p(2, 1, 0);
 
-	vcg::tri::io::ExporterPLY<MyMesh>::Save(res, "/home/alessandro/tmp/inters.ply");
+	vcg::Point3d c;
+
+	for (uint f = 0; f < m.face.size(); ++f) {
+		double dist = std::numeric_limits<double>::max();
+		vcg::face::PointDistanceBase(m.face[f], p, dist, c);
+
+		std::cerr << "Face " << f << ": \n";
+		std::cerr << "\tdist: " << dist<< ";\n";
+		std::cerr << "\tclos: [" << c.X() << "; " << c.Y() << "; " << c.Z() << "]\n";
+	}
 
 	return 0;
 }
